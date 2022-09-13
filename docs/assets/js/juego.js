@@ -1,1 +1,337 @@
-(()=>{"use strict";let s=[];const e=["C","D","H","S"],t=["J","Q","K","A"];let a={puntos:0,cartas:[],valores:[],useAs:!1},n={puntos:0,cartas:[],valores:[],useAs:!1};const o=document.querySelector("#btnPedir"),c=document.querySelector("#btnEmpezar"),u=document.querySelector("#btnDetener"),r=document.querySelector("#btnNuevo"),p=document.querySelector("#puntosJugador"),l=document.querySelector("#jugador-cartas"),i=document.querySelector("#puntosDealer"),d=document.querySelector("#dealer-cartas");(()=>{for(let t=2;t<=10;t++)for(let a of e)s.push(t+a);for(let a of e)for(let e of t)s.push(e+a);_.shuffle(s)})();const m=()=>{if(0===s.length)throw"No quedan más cartas en la baraja";const e=Math.floor(Math.random()*s.length);return s.splice(e,1)[0]},h=s=>{let e=s.substring(0,s.length-1);return e=isNaN(e)?"A"===e?11:10:Number(e),e};let N;o.disabled=!0,u.disabled=!0,c.addEventListener("click",(()=>{const s=m();a.cartas.push(s),a.valores.push(h(s)),a.puntos+=h(s),p.innerText=a.puntos;const e=document.createElement("img");e.src=`assets/cartas/${s}.png`,e.className="carta",l.append(e),setTimeout((()=>{const s=m();"A"===s.substring(0,s.length-1)?a.puntos+h(s)>21?(a.cartas.push(s),a.valores.push(h(s)),a.puntos+=1):(a.cartas.push(s),a.puntos+=11,a.valores.push(h(s))):a.valores.includes(11)&&!a.useAs&&a.puntos+h(s)>21?(a.cartas.push(s),a.valores.push(h(s)),a.puntos+=h(s)-10,a.useAs=!0):(a.cartas.push(s),a.valores.push(h(s)),a.puntos+=h(s)),21===a.puntos?(p.className="blackjack",p.innerText=a.puntos+" - BackJack"):p.innerText=a.puntos;const e=document.createElement("img");e.src=`assets/cartas/${s}.png`,e.className="carta",l.append(e)}),500),setTimeout((()=>{const s=m();n.cartas.push(s),n.valores.push(h(s)),n.puntos+=h(s),i.innerText=n.puntos;const e=document.createElement("img");e.src=`assets/cartas/${s}.png`,e.className="carta",d.append(e),setTimeout((()=>{const s=m();n.cartas.push(s),n.valores.push(h(s)),n.puntos+=h(s),N=s;const e=document.createElement("img");e.src="assets/cartas/red_back.png",e.className="carta",e.id="cartaVuelta",d.append(e),21!=a.puntos&&(o.disabled=!1),u.disabled=!1}),500)}),1e3),c.disabled=!0})),o.addEventListener("click",(()=>{const s=m();"A"===s.substring(0,s.length-1)?a.puntos+h(s)>21?(a.cartas.push(s),a.valores.push(h(s)),a.puntos+=1):(a.cartas.push(s),a.puntos+=11,a.valores.push(h(s))):a.valores.includes(11)&&!a.useAs&&a.puntos+h(s)>21?(a.cartas.push(s),a.valores.push(h(s)),a.puntos+=h(s)-10,a.useAs=!0):(a.cartas.push(s),a.valores.push(h(s)),a.puntos+=h(s)),p.innerText=a.puntos;const e=document.createElement("img");if(e.src=`assets/cartas/${s}.png`,e.className="carta",l.append(e),21===a.puntos&&(p.className="blackjack",p.innerText=a.puntos+" - BlacJack",o.disabled=!0),a.puntos>21){document.querySelector("#cartaVuelta").src=`assets/cartas/${N}.png`,i.className="blackjack",i.innerText=n.puntos+" - GANÓ",p.className="perdio",p.innerText=a.puntos+" - PERDISTE",o.disabled=!0,u.disabled=!0}}));u.addEventListener("click",(()=>(document.querySelector("#cartaVuelta").src=`assets/cartas/${N}.png`,i.innerText=n.puntos,o.disabled=!0,u.disabled=!0,21===n.puntos?(i.className="blackjack",i.innerText=n.puntos+" - GANÓ",p.className="perdio",void(p.innerText=a.puntos+" - PERDISTE")):n.puntos>21?(i.className="perdio",i.innerText=n.puntos+" - PERDIÓ",p.className="blackjack",void(p.innerText=a.puntos+" - GANASTE")):n.puntos>a.puntos&&n.puntos<21?(i.className="blackjack",i.innerText=n.puntos+" - GANÓ",p.className="perdio",void(p.innerText=a.puntos+" - PERDISTE")):void(s=>{do{const e=m();if("A"===e.substring(0,e.length-1)?n.puntos+h(e)>21?(n.cartas.push(e),n.valores.push(h(e)),n.puntos+=1):(n.cartas.push(e),n.valores.push(h(e)),n.puntos+=11):n.valores.includes(11)&&!n.useAs&&n.puntos+h(e)>21?(n.cartas.push(e),n.valores.push(h(e)),n.puntos+=h(e)-10,n.useAs=!0):(n.cartas.push(e),n.valores.push(h(e)),n.puntos+=h(e)),setTimeout((()=>{i.innerText=n.puntos;const s=document.createElement("img");s.src=`assets/cartas/${e}.png`,s.className="carta",d.append(s),n.puntos>21&&(i.className="perdio",i.innerText=n.puntos+" - PERDIÓ",p.className="blackjack",p.innerText=a.puntos+" - GANASTE"),21===n.puntos&&(i.className="blackjack",i.innerText=n.puntos+" - BlacJack",p.className="perdio",p.innerText=a.puntos+" - PERDISTE"),n.puntos>a.puntos&&n.puntos<21&&(i.className="blackjack",i.innerText=n.puntos+" - GANÓ",p.className="perdio",p.innerText=a.puntos+" - PERDISTE"),n.puntos===a.puntos&&n.puntos<21&&(i.className="blackjack",i.innerText=n.puntos+" - GANÓ",p.className="perdio",p.innerText=a.puntos+" - PERDISTE")}),1e3),s>21)break}while(n.puntos<s&&s<=21)})(a.puntos)))),r.addEventListener("click",(()=>location.reload()))})();
+(() => {
+    'use strict'
+
+
+    let deck = [];
+    const types = ['C', 'D', 'H', 'S'];
+    const figures = ['J', 'Q', 'K', 'A'];
+
+    let puntosJugador = 0;
+    let puntosDealer = 0;
+
+    let Jugador = {
+        puntos: 0,
+        cartas: [],
+        valores: [],
+        useAs: false
+    }
+
+    let Dealer = {
+        puntos: 0,
+        cartas: [],
+        valores: [],
+        useAs: false
+    }
+
+    // Referencias html
+
+    const btnPedir = document.querySelector('#btnPedir')
+    const btnEmp = document.querySelector('#btnEmpezar')
+    const btnDet = document.querySelector('#btnDetener')
+    const btnNue = document.querySelector('#btnNuevo')
+    const puntosJugadorEnMesa = document.querySelector('#puntosJugador')
+    const cartasJugador = document.querySelector('#jugador-cartas')
+    const puntosDealerEnMesa = document.querySelector('#puntosDealer')
+    const cartasDealer = document.querySelector('#dealer-cartas')
+
+    const crearDeck = () => {
+
+        for (let i = 2; i <= 10; i++) {
+            for (let type of types) {
+                deck.push(i + type)
+            }
+        }
+
+        for (let type of types) {
+            for (let figure of figures)
+                deck.push(figure + type)
+        }
+
+        return _.shuffle(deck);
+
+    }
+
+    crearDeck()
+
+    const pedirCarta = () => {
+
+        if (deck.length === 0) throw ('No quedan más cartas en la baraja')
+        const numero = Math.floor(Math.random() * deck.length)
+        const carta = deck.splice(numero, 1)
+        return carta[0];
+
+    }
+
+    const valorCarta = (carta) => {
+
+        let valor = carta.substring(0, carta.length - 1)
+
+        if (isNaN(valor)) {
+            valor = (valor === 'A' ? 11 : 10)
+        } else {
+            valor = Number(valor)
+        }
+
+        return valor;
+    }
+
+    // Everntos
+
+    let carta2Dealer;
+    btnPedir.disabled = true;
+    btnDet.disabled = true;
+
+    btnEmp.addEventListener('click', () => {
+        const carta = pedirCarta()
+        Jugador.cartas.push(carta)
+        Jugador.valores.push(valorCarta(carta))
+        Jugador.puntos += valorCarta(carta)
+        puntosJugadorEnMesa.innerText = Jugador.puntos
+        const imagecard = document.createElement('img')
+        imagecard.src = `assets/cartas/${carta}.png`
+        imagecard.className = 'carta'
+        cartasJugador.append(imagecard)
+        setTimeout(() => {
+            const carta = pedirCarta()
+            if (carta.substring(0, carta.length - 1) === 'A') {
+                if ((Jugador.puntos + valorCarta(carta)) > 21) {
+                    Jugador.cartas.push(carta)
+                    Jugador.valores.push(valorCarta(carta))
+                    Jugador.puntos += 1
+                } else {
+                    Jugador.cartas.push(carta)
+                    Jugador.puntos += 11
+                    Jugador.valores.push(valorCarta(carta))
+                }
+            } else {
+                if ((Jugador.valores.includes(11)) && !Jugador.useAs) {
+                    if ((Jugador.puntos + valorCarta(carta)) > 21) {
+                        Jugador.cartas.push(carta)
+                        Jugador.valores.push(valorCarta(carta))
+                        Jugador.puntos += (valorCarta(carta) - 10)
+                        Jugador.useAs = true
+                    } else {
+                        Jugador.cartas.push(carta)
+                        Jugador.valores.push(valorCarta(carta))
+                        Jugador.puntos += valorCarta(carta)
+                    }
+                } else {
+                    Jugador.cartas.push(carta)
+                    Jugador.valores.push(valorCarta(carta))
+                    Jugador.puntos += valorCarta(carta)
+                }
+            }
+            if (Jugador.puntos === 21) {
+                puntosJugadorEnMesa.className = 'blackjack';
+                puntosJugadorEnMesa.innerText = Jugador.puntos + ' - BackJack'
+            } else {
+                puntosJugadorEnMesa.innerText = Jugador.puntos
+            }
+            const imagecard = document.createElement('img')
+            imagecard.src = `assets/cartas/${carta}.png`
+            imagecard.className = 'carta'
+            cartasJugador.append(imagecard)
+        }, 500);
+
+        
+
+        setTimeout(() => {
+            const carta = pedirCarta()
+            Dealer.cartas.push(carta)
+            Dealer.valores.push(valorCarta(carta))
+            Dealer.puntos += valorCarta(carta)
+            puntosDealerEnMesa.innerText = Dealer.puntos
+            const imagecard = document.createElement('img')
+            imagecard.src = `assets/cartas/${carta}.png`
+            imagecard.className = 'carta'
+            cartasDealer.append(imagecard)
+            setTimeout(() => {
+                const carta = pedirCarta();
+                Dealer.cartas.push(carta)
+                Dealer.valores.push(valorCarta(carta))
+                Dealer.puntos += valorCarta(carta)
+                carta2Dealer = carta;
+                const imagecard2 = document.createElement('img')
+                imagecard2.src = `assets/cartas/red_back.png`
+                imagecard2.className = 'carta'
+                imagecard2.id = 'cartaVuelta'
+                cartasDealer.append(imagecard2)
+                if (Jugador.puntos != 21) btnPedir.disabled = false;
+                btnDet.disabled = false;
+            }, 500)
+
+        }, 1000);
+        btnEmp.disabled = true;
+
+    })
+
+
+
+
+    btnPedir.addEventListener('click', () => {
+        const carta = pedirCarta()
+        if (carta.substring(0, carta.length - 1) === 'A') {
+            if ((Jugador.puntos + valorCarta(carta)) > 21) {
+                Jugador.cartas.push(carta)
+                Jugador.valores.push(valorCarta(carta))
+                Jugador.puntos += 1
+            } else {
+                Jugador.cartas.push(carta)
+                Jugador.puntos += 11
+                Jugador.valores.push(valorCarta(carta))
+            }
+        } else {
+            if ((Jugador.valores.includes(11)) && !Jugador.useAs) {
+                if ((Jugador.puntos + valorCarta(carta)) > 21) {
+                    Jugador.cartas.push(carta)
+                    Jugador.valores.push(valorCarta(carta))
+                    Jugador.puntos += (valorCarta(carta) - 10)
+                    Jugador.useAs = true
+                } else {
+                    Jugador.cartas.push(carta)
+                    Jugador.valores.push(valorCarta(carta))
+                    Jugador.puntos += valorCarta(carta)
+                }
+            } else {
+                Jugador.cartas.push(carta)
+                Jugador.valores.push(valorCarta(carta))
+                Jugador.puntos += valorCarta(carta)
+            }
+        }
+
+        puntosJugadorEnMesa.innerText = Jugador.puntos
+        const imagecard = document.createElement('img')
+        imagecard.src = `assets/cartas/${carta}.png`
+        imagecard.className = 'carta'
+        cartasJugador.append(imagecard)
+        if (Jugador.puntos === 21) {
+            puntosJugadorEnMesa.className = 'blackjack';
+            puntosJugadorEnMesa.innerText = Jugador.puntos + ' - BlacJack';
+            btnPedir.disabled = true;
+        }
+        if (Jugador.puntos > 21) {
+            let cartaVuelta = document.querySelector('#cartaVuelta');
+            cartaVuelta.src = `assets/cartas/${carta2Dealer}.png`;
+            puntosDealerEnMesa.className = 'blackjack';
+            puntosDealerEnMesa.innerText = Dealer.puntos + ' - GANÓ';
+            puntosJugadorEnMesa.className = 'perdio';
+            puntosJugadorEnMesa.innerText = Jugador.puntos + ' - PERDISTE';
+            btnPedir.disabled = true;
+            btnDet.disabled = true;
+        }
+    })
+
+    // Turno Dealer
+
+    const turnoDealer = (puntosMinimos) => {
+
+        do {
+            const carta = pedirCarta()
+            if (carta.substring(0, carta.length - 1) === 'A') {
+                if ((Dealer.puntos + valorCarta(carta)) > 21) {
+                    Dealer.cartas.push(carta)
+                    Dealer.valores.push(valorCarta(carta))
+                    Dealer.puntos += 1
+                } else {
+                    Dealer.cartas.push(carta)
+                    Dealer.valores.push(valorCarta(carta))
+                    Dealer.puntos += 11
+                }
+            } else {
+                if ((Dealer.valores.includes(11)) && !Dealer.useAs) {
+                    if ((Dealer.puntos + valorCarta(carta)) > 21) {
+                        Dealer.cartas.push(carta)
+                        Dealer.valores.push(valorCarta(carta))
+                        Dealer.puntos += (valorCarta(carta) - 10)
+                        Dealer.useAs = true
+                    } else {
+                        Dealer.cartas.push(carta)
+                        Dealer.valores.push(valorCarta(carta))
+                        Dealer.puntos += valorCarta(carta)
+                    }
+                } else {
+                    Dealer.cartas.push(carta)
+                    Dealer.valores.push(valorCarta(carta))
+                    Dealer.puntos += valorCarta(carta)
+                }
+            }
+
+            setTimeout(() => {
+                puntosDealerEnMesa.innerText = Dealer.puntos
+                const imagecard = document.createElement('img')
+                imagecard.src = `assets/cartas/${carta}.png`
+                imagecard.className = 'carta'
+                cartasDealer.append(imagecard)
+                if (Dealer.puntos > 21) {
+                    puntosDealerEnMesa.className = 'perdio';
+                    puntosDealerEnMesa.innerText = Dealer.puntos + ' - PERDIÓ';
+                    puntosJugadorEnMesa.className = 'blackjack';
+                    puntosJugadorEnMesa.innerText = Jugador.puntos + ' - GANASTE';
+                }
+
+                if (Dealer.puntos === 21) {
+                    puntosDealerEnMesa.className = 'blackjack';
+                    puntosDealerEnMesa.innerText = Dealer.puntos + ' - BlacJack';
+                    puntosJugadorEnMesa.className = 'perdio';
+                    puntosJugadorEnMesa.innerText = Jugador.puntos + ' - PERDISTE';
+                }
+
+                if ((Dealer.puntos > Jugador.puntos) && (Dealer.puntos < 21)) {
+                    puntosDealerEnMesa.className = 'blackjack';
+                    puntosDealerEnMesa.innerText = Dealer.puntos + ' - GANÓ';
+                    puntosJugadorEnMesa.className = 'perdio';
+                    puntosJugadorEnMesa.innerText = Jugador.puntos + ' - PERDISTE';
+                }
+
+                if ((Dealer.puntos === Jugador.puntos) && (Dealer.puntos < 21)) {
+                    puntosDealerEnMesa.className = 'blackjack';
+                    puntosDealerEnMesa.innerText = Dealer.puntos + ' - GANÓ';
+                    puntosJugadorEnMesa.className = 'perdio';
+                    puntosJugadorEnMesa.innerText = Jugador.puntos + ' - PERDISTE';
+                }
+            }, 1000)
+
+            if (puntosMinimos > 21) {
+                break
+            }
+
+
+        } while ((Dealer.puntos < puntosMinimos) && (puntosMinimos <= 21))
+
+    }
+
+    btnDet.addEventListener('click', () => {
+        let cartaVuelta = document.querySelector('#cartaVuelta');
+        cartaVuelta.src = `assets/cartas/${carta2Dealer}.png`;
+        puntosDealerEnMesa.innerText = Dealer.puntos;
+        btnPedir.disabled = true;
+        btnDet.disabled = true;
+        if (Dealer.puntos === 21) {
+            puntosDealerEnMesa.className = 'blackjack';
+            puntosDealerEnMesa.innerText = Dealer.puntos + ' - GANÓ';
+            puntosJugadorEnMesa.className = 'perdio';
+            puntosJugadorEnMesa.innerText = Jugador.puntos + ' - PERDISTE';
+            return
+        }
+        if (Dealer.puntos > 21) {
+            puntosDealerEnMesa.className = 'perdio';
+            puntosDealerEnMesa.innerText = Dealer.puntos + ' - PERDIÓ';
+            puntosJugadorEnMesa.className = 'blackjack';
+            puntosJugadorEnMesa.innerText = Jugador.puntos + ' - GANASTE';
+            return
+        }
+        if ((Dealer.puntos > Jugador.puntos) && (Dealer.puntos < 21)) {
+            puntosDealerEnMesa.className = 'blackjack';
+            puntosDealerEnMesa.innerText = Dealer.puntos + ' - GANÓ';
+            puntosJugadorEnMesa.className = 'perdio';
+            puntosJugadorEnMesa.innerText = Jugador.puntos + ' - PERDISTE';
+            return
+        }
+        turnoDealer(Jugador.puntos)
+
+    })
+
+    btnNue.addEventListener('click', () => location.reload())
+
+
+})()
