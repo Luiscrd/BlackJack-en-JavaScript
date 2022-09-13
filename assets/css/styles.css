@@ -1,0 +1,93 @@
+html,
+body {
+    margin: 0;
+    background-color: rgb(12, 66, 3) !important;
+    color: white !important;
+}
+
+@font-face {
+    font-family: 'Hologram';
+    src: url("../fonts/Hologram.ttf");
+  }
+
+.titulo {
+    text-align: center;
+    background-color: black;
+    color: rgb(163, 2, 2);
+    padding: 20px;
+    font-size: 30px;
+    font-family: Hologram;
+}
+
+.logo-tit{
+    position: relative;
+    width: 50px;
+}
+
+@font-face {
+    font-family: 'Chunky';
+    src: url("../fonts/Chunky.ttf");
+  }
+
+.concet{
+    width: 50% !important;
+    margin: 0 25% !important;
+}
+
+h1.titulo-cartas {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: Chunky;
+}
+
+div.btnsjug{
+    position: relative;
+    margin-bottom: 40px;
+}
+
+img.carta {
+    position: relative;
+    width: 150px;
+    left: 100px;
+    margin-left: -75px;
+}
+
+#dealer-baraja{
+    position: absolute;
+    right: 95px;
+    top: 90px;
+}
+
+#divBotones {
+    display: flex;
+	justify-content: space-evenly;
+    
+
+}
+
+img.carta-bar{
+    position: relative;
+    width: 150px;
+    left: 100px;
+    margin-left: -140px;
+}
+
+.perdio {
+    color: red;
+}
+
+.blackjack{
+    color: green;
+}
+
+.fiucgas-jug{
+    position: absolute;
+    width: 100px;
+    right: 10px;
+    top: 190px;
+}
+
+#jugador-cartas, #dealer-cartas {
+    height: 220px;
+}
+
