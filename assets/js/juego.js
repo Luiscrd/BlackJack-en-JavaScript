@@ -101,6 +101,7 @@
                 } else {
                     Jugador.cartas.push(carta)
                     Jugador.puntos += 11
+                    Jugador.valores.push(valorCarta(carta))
                 }
             } else {
                 if ((Jugador.valores.includes(11)) && !Jugador.useAs) {
@@ -177,6 +178,7 @@
             } else {
                 Jugador.cartas.push(carta)
                 Jugador.puntos += 11
+                Jugador.valores.push(valorCarta(carta))
             }
         } else {
             if ((Jugador.valores.includes(11)) && !Jugador.useAs) {
